@@ -1,10 +1,12 @@
 # whichs
 
 ## description
-`whichs` is a command line tool to find files in `$PATH`, like the shell built-in commands `which`, but `which` on returns the first result while `whichs` returns all.
+`whichs` is a command line tool to find files in `$PATH`, like the shell built-in commands `which`, but `which` only returns the first result while `whichs` returns all.
 
 ## install
+```shell
 npm i whichs -g
+```
 
 ## usage
 ```shell
