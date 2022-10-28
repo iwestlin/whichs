@@ -4,8 +4,10 @@
 `whichs` is a command line tool to find files in `$PATH`, like the shell built-in commands `which`, but `which` only returns the first result while `whichs` returns all.
 
 ## install
+> I want to use the `whichs` for npm package name, but while I publishing it, I got 404 error and it wasted me an hour to find out that it's not an authToken issue, you just can not use the `whichs` name😅
+
 ```shell
-npm i whichs -g
+npm i findp -g
 ```
 
 ## usage

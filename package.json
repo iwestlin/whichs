@@ -1,13 +1,14 @@
 {
-  "name": "whichs",
-  "version": "1.0.0",
-  "description": "",
+  "name": "findp",
+  "version": "1.0.1",
+  "description": "a command line tool to find files in `$PATH`",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
     "whichs": "./bin/whichs.js"
   },
+  "repository": "git://github.com/iwestlin/whichs.git",
   "keywords": [],
   "author": "",
   "license": "ISC"
