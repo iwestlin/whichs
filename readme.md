@@ -24,4 +24,7 @@ whichs node -a
 
 ## notice
 - `whichs` does not return shell built-in commands like `cd`
-- if `whichs` finds a link, it will return the real file's path which the link pointed to.
+- if `whichs` finds a link, it will print something like
+```
+/path/to/link -> /path/to/real/file
+```

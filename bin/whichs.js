@@ -25,7 +25,15 @@ function main () {
       // console.error(e)
     }
   })
-  RESULTS.forEach((v, i) => console.log(i + 1, v))
+  RESULTS.forEach((v, i) => {
+    const index = i + 1
+    const {pt, origin_pt} = v
+    if (origin_pt) {
+      console.log(index, origin_pt, '->', pt)
+    } else {
+      console.log(index, pt)
+    }
+  })
 }
 
 function process_dir (dir) {
@@ -56,7 +64,7 @@ function process_dir (dir) {
 }
 
 function handle_file (file) {
-  let {pt, name, is_dir, is_link} = file
+  let {pt, name, is_dir, is_link, origin_pt} = file
   if (is_link) {
     let link = fs.readlinkSync(pt)
     link = path.resolve(pt, '..', link)
@@ -65,12 +73,13 @@ function handle_file (file) {
       name,
       pt: link,
       is_dir: info.isDirectory(),
-      is_link: info.isSymbolicLink()
+      is_link: info.isSymbolicLink(),
+      origin_pt: pt
     })
   }
   if (is_dir) return process_dir(pt)
   if ((name === keyword) && (include_unexcutable || excutable(pt))) {
-    RESULTS.push(pt)
+    RESULTS.push({pt, origin_pt})
   }
 }
 
