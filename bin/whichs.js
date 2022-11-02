@@ -44,14 +44,14 @@ function process_dir (dir) {
   if (SUPPORT_WITHFILETYPES) {
     files = fs.readdirSync(dir, {withFileTypes: true}).map(file => {
       const pt = `${dir}/${file.name}`
-      return {pt, name: file.name, is_dir: file.isDirectory(), is_link: file.isSymbolicLink()}
+      return {pt, name: file.name, is_link: file.isSymbolicLink()}
     })
   } else {
     // for lower version of node which does not support withFileTypes
     files = fs.readdirSync(dir).map(name => {
       const pt = `${dir}/${name}`
       const t = fs.lstatSync(pt)
-      return {pt, name, is_dir: t.isDirectory(), is_link: t.isSymbolicLink()}
+      return {pt, name, is_link: t.isSymbolicLink()}
     })
   }
   files.forEach(v => {
@@ -64,7 +64,7 @@ function process_dir (dir) {
 }
 
 function handle_file (file) {
-  let {pt, name, is_dir, is_link, origin_pt} = file
+  let {pt, name, is_link, origin_pt} = file
   if (is_link) {
     let link = fs.readlinkSync(pt)
     link = path.resolve(pt, '..', link)
@@ -72,12 +72,10 @@ function handle_file (file) {
     return handle_file({
       name,
       pt: link,
-      is_dir: info.isDirectory(),
       is_link: info.isSymbolicLink(),
       origin_pt: pt
     })
   }
-  if (is_dir) return process_dir(pt)
   if ((name === keyword) && (include_unexcutable || excutable(pt))) {
     RESULTS.push({pt, origin_pt})
   }
